@@ -1,29 +1,39 @@
+const config = require("config");
+const express = require('express');
+const cors = require('cors');
+const cookieParser = require('cookie-parser');
+const path = require('path');
 const dotenv = require('dotenv')
 //load env variables
 dotenv.config()
-const cors = require('cors')
 const helmet = require('helmet')
-const express = require('express')
-const fetch = require('node-fetch')
 const bodyParser = require('body-parser')
 
-const searchRouter = require('./search_photo')
+const app = express();
+const port = process.env.PORT || 8080;
 
-//node-fetch is made global
-global.fetch = fetch
-
-const PORT = process.env.PORT || 3500
-
-const app = express()
-
-//middleware
-app.use(cors())
+app.use(cors());
+app.use(cookieParser());
 app.use(helmet())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({
   extended: false
 }))
 
-app.use('/search', searchRouter)
+//api call
+const users = require("./api/paths");
+app.use('/',users);
 
-app.listen(PORT, () => console.log(`server initilized @ ${PORT}`))
+//public files
+app.use(express.static(path.join(__dirname,'/public')));
+
+//welcome page
+app.get(['/','/index.html'],(req, res)=>{
+	res.sendFile(path.join(__dirname,'/public/index.html'));
+})
+
+
+//listen 
+app.listen(port, ( ) => {
+    console.log(`The server is running on ${port}`);
+})
