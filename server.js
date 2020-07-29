@@ -1,13 +1,13 @@
-const cors = require('cors')
 const dotenv = require('dotenv')
+//load env variables
+dotenv.config()
+const cors = require('cors')
 const helmet = require('helmet')
 const express = require('express')
 const fetch = require('node-fetch')
 const bodyParser = require('body-parser')
-const Unsplash = require('unsplash-js').default
 
-//load env variables
-dotenv.config()
+const searchRouter = require('./search_photo')
 
 //node-fetch is made global
 global.fetch = fetch
@@ -24,8 +24,6 @@ app.use(bodyParser.urlencoded({
   extended: false
 }))
 
-const unsplash = new Unsplash({
-  accessKey: "{APP_ACCESS_KEY}",
-})
+app.use('/search', searchRouter)
 
 app.listen(PORT, () => console.log(`server initilized @ ${PORT}`))
