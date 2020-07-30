@@ -13,7 +13,7 @@ const storageEngine = multer.diskStorage({
 // picture
 
 let input = [
-  { name: 'picture', maxCount: 5 },
+  { name: 'picture', maxCount: 1},
 ]
 
 const picture =  multer({

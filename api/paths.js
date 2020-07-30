@@ -11,9 +11,15 @@ unsplash.users.profile(config.get("user"))
     .catch(err => {
       // Your flawless error handling code
     });
+const cloudinary = require('cloudinary').v2
+cloudinary.config({ 
+  cloud_name: config.get("cloud_name"), 
+  api_key: config.get("api_key"), 
+  api_secret: config.get("api_secret") 
+});
 
 //routes
-
+let global_pic;
 router.post("/upload", (req, res) => {
   Picture(req, res,(error) => {
       // console.log(res);
@@ -32,8 +38,8 @@ router.post("/upload", (req, res) => {
           });
         }
         let pictures =  PICTURE;
-        //further processing. Incase if we decide to store in db.
-        res.json("Done.");
+        global_pic = path.join(__dirname,'../public/uploads/' + pictures[0]);
+        res.sendFile(path.join(__dirname,'../public/uploads/' + pictures[0]));
       };
 
       if(req.files == undefined){
@@ -47,19 +53,21 @@ router.post("/upload", (req, res) => {
 
 router.get('/search', (req, res) => {
   const page = req.body.page || 1
-  const per_page = req.body.per_page || 10
+  const per_page = req.body.per_page || 5
 
   //make request to api
+  let output = [];
   unsplash.search.photos(req.body.search, page, per_page, {
       orientation: "portrait"
     })
     .then(response => response.json())
     .then(data => {
-      // Your code
+      data.results.forEach((pics) => {
+        output.push(pics.urls.regular);
+      });
       res.status(200).json({
-        message: 'success',
-        data: data
-      })
+          output
+      });
     })
     .catch(err => {
       res.json({
@@ -68,4 +76,9 @@ router.get('/search', (req, res) => {
     })
 })
 
+let qwerty = cloudinary.image("sample.jpg", {transformation: [
+        {width: 500, crop: "scale"},
+        {overlay: {font_family: "Arial", font_size:80, text: "OHW"}}
+        ]});
+ 
 module.exports = router;
