@@ -8,6 +8,9 @@ const dotenv = require('dotenv')
 dotenv.config()
 const helmet = require('helmet')
 const bodyParser = require('body-parser')
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger.json');
+
 
 const app = express();
 const port = process.env.PORT || 8080;
@@ -22,18 +25,21 @@ app.use(bodyParser.urlencoded({
 
 //api call
 const users = require("./api/paths");
-app.use('/',users);
+app.use('/api', users);
+
+//documentation link
+app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 //public files
-app.use(express.static(path.join(__dirname,'/public')));
+app.use(express.static(path.join(__dirname, '/public')));
 
 //welcome page
-app.get(['/','/index.html'],(req, res)=>{
-	res.sendFile(path.join(__dirname,'/public/index.html'));
+app.get(['/', '/index.html'], (req, res) => {
+  res.sendFile(path.join(__dirname, '/public/index.html'));
 })
 
 
 //listen 
-app.listen(port, ( ) => {
-    console.log(`The server is running on ${port}`);
+app.listen(port, () => {
+  console.log(`The server is running on ${port}`);
 })
