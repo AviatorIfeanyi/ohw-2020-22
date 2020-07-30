@@ -3,3 +3,153 @@
   margin:0;
   box-sizing:border-box;
 }
+:root {
+  --main-color:#e07b39;
+}
+body,
+html {
+  width:100%;
+  height:100%;
+  background-color:rgba(245,245,245,0.5);
+}
+nav, 
+.hero {
+  color:var(--main-color);
+  padding:10px 15px;
+}
+nav {
+  width:100vw;
+  position:absolute;
+  display:flex;
+  justify-content:space-between;
+  font-family: 'Quicksand', sans-serif;
+  background-color:var(--main-color);
+  color:white;
+}
+.hero {
+  width:100vw;
+  height:100vh;
+  font-family: 'Grenze Gotisch', cursive;
+  display:flex;
+  align-items:center;
+  max-height:600px;
+}
+h1 {
+  font-size:400%;
+}
+a {
+  font-size:100px;
+  color:var(--main);
+  text-decoration:none;
+}
+form {
+  position:relative;
+  margin-top:0vh;
+}
+button {
+  background-color:var(--main-color);
+  width:180px;
+  border-radius:10px;
+  padding:10px;
+  font-family:'Dosis', sans-serif;
+  color:white;
+  border:none;
+  margin:50px auto;
+  font-size:150%;
+  display:block;
+}
+.section {
+  background-color:white;
+  width:95%;
+  display:block;
+  margin:40px auto;
+  border-bottom:4px solid var(--main-color);
+  border-radius:8px 8px 4px 4px;
+  padding:10px;
+}
+.section h2, label {
+  font-size:180%;
+  font-family:'Dosis', sans-serif;
+  font-weight:bold;
+}
+#background {
+  display:flex;
+  height:50px;
+  align-items:center;
+  width:100%;
+  justify-content:center;
+}
+i {
+  margin:0 10px;
+}
+/*.fa {
+  color:var(--main-color);
+}*/
+.background-select {
+  display:flex;
+  justify-content:space-between;
+}
+.background-select div {
+  background-color:var(--main-color);
+  color:white;
+  width:30%;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  height:24.5vw;;
+  border-radius:10px;
+  margin-top:30px;
+}
+input{
+  border:0.5px solid var(--main-color);
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+  font-size:120%;
+  width:100%;
+  padding:10px;
+  border:none;
+  outline:none;
+  border-bottom:1px solid var(--main-color);
+  margin-bottom:30px;
+  background-color:transparent;
+  border-radius:5px 5px 0 0
+}
+input[type="number"] {
+  width:50%;
+}
+#fontStyle div{
+  width:50%;
+  background-color:var(--main-color);
+  height:2px;
+  margin-top:20px;
+}
+#fontStyle{
+  display:flex;
+}
+.fontLists {
+  width:80%;
+  display:none;
+  flex-direction:column;
+  overflow:scroll;
+  padding:10px 4px;
+  border-radius:7px;
+  border:0.5px solid var(--main-color);
+}
+.fontLists p {
+  margin:5px;
+  font-size:110%;
+}
+#fontStyle i {margin-left:-10px;}
+.Dancing {font-family:'Dancing Script';}
+.Dosis {font-family: 'Dosis', serif;}
+.Open {font-family: 'Open Sans Condensed', sans-serif;}
+.Grenze {font-family: 'Grenze Gotisch', cursive;}
+.Playfair {font-family: 'Playfair Display', serif;}
+.Josefin {font-family: 'Josefin Sans', sans-serif;}
+.MuseoModerno {font-family: 'MuseoModerno Condensed', sans-serif;}
+.Orbitron {font-family: 'Orbitron Into Light', cursive;}
+.Quicksand {font-family:'Quicksand', sans-serif;}
+.Yannone {font-family:'Yannone', sams-serif;}
+.Ubuntu {font-family:'Ubuntu';}
+.Jura {font-family:'Jura'}
+
