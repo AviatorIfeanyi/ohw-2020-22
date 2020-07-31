@@ -9,17 +9,17 @@ const fetch = require('node-fetch');
 global.fetch = fetch;
 const Unsplash = require('unsplash-js').default;
 const unsplash = new Unsplash({
-  accessKey: config.get("secret")
+  accessKey: config.util.getEnv("secret")
 });
-unsplash.users.profile(config.get("user"))
+unsplash.users.profile(config.util.getEnv("user"))
   .catch(err => {
     // Your flawless error handling code
   });
 const cloudinary = require('cloudinary').v2
 cloudinary.config({
-  cloud_name: config.get("cloud_name"),
-  api_key: config.get("api_key"),
-  api_secret: config.get("api_secret")
+  cloud_name: config.util.getEnv("cloud_name"),
+  api_key: config.util.getEnv("api_key"),
+  api_secret: config.util.getEnv("api_secret")
 });
 
 //routes
@@ -30,32 +30,32 @@ router.post("/upload", (req, res) => {
       return res.json("Too many files to upload.");
     }
     if (error) return res.json("Error when trying to upload files.");
-      let OUTPUT = () => {
-        let PICTURE = [];
-        if (req.files["picture"] === undefined){
-          PICTURE = req.files["picture"]
-        }else {
-          req.files["picture"].forEach((image)=>{
-            PICTURE.push(image.filename);
+    let OUTPUT = () => {
+      let PICTURE = [];
+      if (req.files["picture"] === undefined) {
+        PICTURE = req.files["picture"]
+      } else {
+        req.files["picture"].forEach((image) => {
+          PICTURE.push(image.filename);
+        });
+      }
+      let pictures = PICTURE;
+      cloudinary.uploader.upload(path.join(__dirname, '../public/uploads/' + pictures[0]), function (error, result) {
+        if (result) {
+          let name = result.public_id;
+          let picture = result.secure_url;
+          res.status(200).json({
+            name,
+            picture
+          });
+        } else {
+          res.status(200).json({
+            picError: "Unable to upload image."
           });
         }
-        let pictures =  PICTURE;
-        cloudinary.uploader.upload(path.join(__dirname,'../public/uploads/' + pictures[0]), function(error, result) {
-          if (result){
-            let name = result.public_id;
-            let picture = result.secure_url;
-            res.status(200).json({
-              name,
-              picture
-            });
-          }else{
-            res.status(200).json({
-              picError: "Unable to upload image."
-            });
-          }
-        });
-        // res.sendFile(path.join(__dirname,'../public/uploads/' + pictures[0]));
-      };
+      });
+      // res.sendFile(path.join(__dirname,'../public/uploads/' + pictures[0]));
+    };
 
     if (req.files == undefined) {
       OUTPUT()
@@ -93,15 +93,15 @@ router.get('/search', (req, res) => {
 
 router.get('/image', (req, res) => {
   const image = req.body.image;
-  cloudinary.uploader.upload(image, function(error, result) {
-    if (result){
+  cloudinary.uploader.upload(image, function (error, result) {
+    if (result) {
       let name = result.public_id;
       let picture = result.secure_url;
       res.status(200).json({
         name,
         picture
       });
-    }else{
+    } else {
       res.status(200).json({
         picError: "Unable to upload image."
       });
@@ -110,15 +110,44 @@ router.get('/image', (req, res) => {
 })
 
 router.post('/text', (req, res) => {
-  const {name, width, crop, font_family, font_size, font_weight,
-  font_style, text_decoration, text_align, text, gravity, y, x, color} = req.body;
-  let textImage = cloudinary.image(name, {transformation: [
-  {width: width, crop: crop},
-  {overlay: {font_family: font_family, font_size: font_size,
-  font_weight: font_weight, font_style: font_style, text_decoration: text_decoration, 
-  text_align: text_align, text: text}, gravity: gravity, y: y, 
-  x: x, color: color }
-  ]});
+  const {
+    name,
+    width,
+    crop,
+    font_family,
+    font_size,
+    font_weight,
+    font_style,
+    text_decoration,
+    text_align,
+    text,
+    gravity,
+    y,
+    x,
+    color
+  } = req.body;
+  let textImage = cloudinary.image(name, {
+    transformation: [{
+        width: width,
+        crop: crop
+      },
+      {
+        overlay: {
+          font_family: font_family,
+          font_size: font_size,
+          font_weight: font_weight,
+          font_style: font_style,
+          text_decoration: text_decoration,
+          text_align: text_align,
+          text: text
+        },
+        gravity: gravity,
+        y: y,
+        x: x,
+        color: color
+      }
+    ]
+  });
   res.status(200).json({
     textImage
   });
