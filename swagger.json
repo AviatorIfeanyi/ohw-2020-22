@@ -51,6 +51,69 @@
           }
         }
       }
+    },
+    "/text": {
+      "post": {
+        "summary": "Allows users to upload image and text for manipulation",
+        "description": "Returns image after manipulation",
+        "parameters": [{
+          "name": "request body",
+          "in": "body",
+          "description": "",
+          "schema": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "width": {
+                "type": "string"
+              },
+              "crop": {
+                "type": "string"
+              },
+              "font-family": {
+                "type": "string"
+              },
+              "font-weight": {
+                "type": "string"
+              },
+              "font-size": {
+                "type": "string"
+              },
+              "font-style": {
+                "type": "string"
+              },
+              "font-decoration": {
+                "type": "string"
+              },
+              "text-aign": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "gravity": {
+                "type": "string"
+              },
+              "x": {
+                "type": "string"
+              },
+              "y": {
+                "type": "string"
+              },
+              "color": {
+                "type": "string"
+              }
+            }
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "Returned imaged after manipulation"
+          }
+        }
+      }
     }
 
   }

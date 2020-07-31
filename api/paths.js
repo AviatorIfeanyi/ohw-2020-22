@@ -9,17 +9,17 @@ const fetch = require('node-fetch');
 global.fetch = fetch;
 const Unsplash = require('unsplash-js').default;
 const unsplash = new Unsplash({
-  accessKey: config.util.getEnv("secret")
+  accessKey: config.get("secret")
 });
-unsplash.users.profile(config.util.getEnv("user"))
+unsplash.users.profile(config.get("user"))
   .catch(err => {
     // Your flawless error handling code
   });
 const cloudinary = require('cloudinary').v2
 cloudinary.config({
-  cloud_name: config.util.getEnv("cloud_name"),
-  api_key: config.util.getEnv("api_key"),
-  api_secret: config.util.getEnv("api_secret")
+  cloud_name: config.get("cloud_name"),
+  api_key: config.get("api_key"),
+  api_secret: config.get("api_secret")
 });
 
 //routes
