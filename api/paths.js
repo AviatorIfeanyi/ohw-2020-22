@@ -23,7 +23,6 @@ cloudinary.config({
 });
 
 //routes
-let global_pic;
 router.post("/upload", (req, res) => {
   Picture(req, res, (error) => {
     // console.log(res);
@@ -31,20 +30,32 @@ router.post("/upload", (req, res) => {
       return res.json("Too many files to upload.");
     }
     if (error) return res.json("Error when trying to upload files.");
-
-    let OUTPUT = () => {
-      let PICTURE = [];
-      if (req.files["picture"] === undefined) {
-        PICTURE = req.files["picture"]
-      } else {
-        req.files["picture"].forEach((image) => {
-          PICTURE.push(image.filename);
+      let OUTPUT = () => {
+        let PICTURE = [];
+        if (req.files["picture"] === undefined){
+          PICTURE = req.files["picture"]
+        }else {
+          req.files["picture"].forEach((image)=>{
+            PICTURE.push(image.filename);
+          });
+        }
+        let pictures =  PICTURE;
+        cloudinary.uploader.upload(path.join(__dirname,'../public/uploads/' + pictures[0]), function(error, result) {
+          if (result){
+            let name = result.public_id;
+            let picture = result.secure_url;
+            res.status(200).json({
+              name,
+              picture
+            });
+          }else{
+            res.status(200).json({
+              picError: "Unable to upload image."
+            });
+          }
         });
-      }
-      let pictures = PICTURE;
-      global_pic = path.join(__dirname, '../public/uploads/' + pictures[0]);
-      res.sendFile(path.join(__dirname, '../public/uploads/' + pictures[0]));
-    };
+        // res.sendFile(path.join(__dirname,'../public/uploads/' + pictures[0]));
+      };
 
     if (req.files == undefined) {
       OUTPUT()
@@ -78,21 +89,49 @@ router.get('/search', (req, res) => {
         error: err
       })
     })
+});
+
+router.get('/image', (req, res) => {
+  const image = req.body.image;
+  cloudinary.uploader.upload(image, function(error, result) {
+    if (result){
+      let name = result.public_id;
+      let picture = result.secure_url;
+      res.status(200).json({
+        name,
+        picture
+      });
+    }else{
+      res.status(200).json({
+        picError: "Unable to upload image."
+      });
+    }
+  });
 })
 
-let qwerty = cloudinary.image("sample.jpg", {
-  transformation: [{
-      width: 500,
-      crop: "scale"
-    },
-    {
-      overlay: {
-        font_family: "Arial",
-        font_size: 80,
-        text: "OHW"
-      }
-    }
-  ]
-});
+router.post('/text', (req, res) => {
+  const {name, width, crop, font_family, font_size, font_weight,
+  font_style, text_decoration, text_align, text, gravity, y, x, color} = req.body;
+  let textImage = cloudinary.image(name, {transformation: [
+  {width: width, crop: crop},
+  {overlay: {font_family: font_family, font_size: font_size,
+  font_weight: font_weight, font_style: font_style, text_decoration: text_decoration, 
+  text_align: text_align, text: text}, gravity: gravity, y: y, 
+  x: x, color: color }
+  ]});
+  res.status(200).json({
+    textImage
+  });
+})
+
+// An example of how the inputs should be.
+
+// let textImage = cloudinary.image(name, {transformation: [
+// {width: 500, crop: "scale"},
+// {overlay: {font_family: "Arial", font_size:80,
+// font_weight: "bold", font_style: "italics", text_decoration: "underline", 
+// text_align: "center", text: "OHW"}, gravity: "south", y: 20, 
+// x: 3, color: "#00000080" }
+// ]});
 
 module.exports = router;
