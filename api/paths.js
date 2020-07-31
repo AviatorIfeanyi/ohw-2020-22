@@ -1,32 +1,35 @@
 const config = require("config");
-const express = require("express"); 
+const express = require("express");
 const router = express.Router();
-const {Picture}    = require('../upload');
+const {
+  Picture
+} = require('../upload');
 const path = require('path');
 const fetch = require('node-fetch');
 global.fetch = fetch;
 const Unsplash = require('unsplash-js').default;
-const unsplash = new Unsplash({ accessKey: config.get("secret") });
+const unsplash = new Unsplash({
+  accessKey: config.get("secret")
+});
 unsplash.users.profile(config.get("user"))
-    .catch(err => {
-      // Your flawless error handling code
-    });
+  .catch(err => {
+    // Your flawless error handling code
+  });
 const cloudinary = require('cloudinary').v2
-cloudinary.config({ 
-  cloud_name: config.get("cloud_name"), 
-  api_key: config.get("api_key"), 
-  api_secret: config.get("api_secret") 
+cloudinary.config({
+  cloud_name: config.get("cloud_name"),
+  api_key: config.get("api_key"),
+  api_secret: config.get("api_secret")
 });
 
 //routes
 router.post("/upload", (req, res) => {
-  Picture(req, res,(error) => {
-      // console.log(res);
-      if (error === "LIMIT_UNEXPECTED_FILE") {
-            return res.json("Too many files to upload.");
-            }
-      if (error) return res.json("Error when trying to upload files.");
-
+  Picture(req, res, (error) => {
+    // console.log(res);
+    if (error === "LIMIT_UNEXPECTED_FILE") {
+      return res.json("Too many files to upload.");
+    }
+    if (error) return res.json("Error when trying to upload files.");
       let OUTPUT = () => {
         let PICTURE = [];
         if (req.files["picture"] === undefined){
@@ -54,18 +57,18 @@ router.post("/upload", (req, res) => {
         // res.sendFile(path.join(__dirname,'../public/uploads/' + pictures[0]));
       };
 
-      if(req.files == undefined){
-          OUTPUT()
-      }else(
-        OUTPUT()
-      );
-    }); 
+    if (req.files == undefined) {
+      OUTPUT()
+    } else(
+      OUTPUT()
+    );
+  });
 });
 
 
 router.get('/search', (req, res) => {
-  const page = req.body.page || 1
-  const per_page = req.body.per_page || 5
+  const page = parseInt(req.body.page) || 1
+  const per_page = parseInt(req.body.per_page) || 5
 
   //make request to api
   let output = [];
@@ -78,7 +81,7 @@ router.get('/search', (req, res) => {
         output.push(pics.urls.regular);
       });
       res.status(200).json({
-          output
+        output
       });
     })
     .catch(err => {
@@ -86,7 +89,7 @@ router.get('/search', (req, res) => {
         error: err
       })
     })
-})
+});
 
 router.get('/image', (req, res) => {
   const image = req.body.image;
