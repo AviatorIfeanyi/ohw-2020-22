@@ -18,4 +18,4 @@ Documentation can be found on https://documenter.getpostman.com/view/10556337/T1
 
 ## Pen Image Example
 
-![pen image example](https://github.com/olawale1rty/ohw-2020-22/blob/backend/penImageExample.jpg?raw=true)
+![pen image example](https://github.com/olawale1rty/ohw-2020-22/blob/backend/penImageExample.jpeg?raw=true)
