@@ -25,7 +25,7 @@ app.use(bodyParser.urlencoded({
 
 //api call
 const users = require("./api/paths");
-app.use('/api', users);
+app.use('/', users);
 
 //documentation link
 app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
