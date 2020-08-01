@@ -11,7 +11,6 @@ const bodyParser = require('body-parser')
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
 
-
 const app = express();
 const port = process.env.PORT || 8080;
 
