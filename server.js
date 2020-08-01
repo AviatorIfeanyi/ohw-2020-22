@@ -10,8 +10,6 @@ const helmet = require('helmet')
 const bodyParser = require('body-parser')
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
-
-
 const app = express();
 const port = process.env.PORT || 8080;
 
@@ -25,10 +23,10 @@ app.use(bodyParser.urlencoded({
 
 //api call
 const users = require("./api/paths");
-app.use('/api', users);
+app.use('/', users);
 
 //documentation link
-app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 //public files
 app.use(express.static(path.join(__dirname, '/public')));
