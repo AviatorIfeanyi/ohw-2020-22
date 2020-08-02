@@ -1,35 +1,16 @@
-inputs = document.querySelectorAll("input");
-fonts = [
-  'Dancing Script',
-  'Dosis',
-  'Grenze Gotisch',
-  'Josefin Sans',
-  'Jura',
-  'MuseoModerno',
-  'Orbitron',
-  'Playfair Display',
-  'Quicksand',
-  'Yannone Kaffeesatz',
-  'Dancing Script',
-  'Open Sans Condensed',
-  'Ubuntu'
-]
-markup = ""
-for (var i of fonts) {
-  markup += "<p class=" + i + ">This is a boy</p>";
-}
-document.querySelector(".fontLists").innerHTML = markup;
-function focused(x) {
-  x.style.backgroundColor = "rgba(224,123,57,0.1)";
-}
-function blurred(x) {
-  x.style.backgroundColor = "transparent";
-}
-open = false
-document.getElementById('fontStye').addEventListener('click', openCloseList, false);
+const unsplasht = document.querySelector('.unsplasht');
+const unsplash = document.querySelector('.unsplash');
+const cont = document.querySelector('.cont');
+const img = document.querySelector('.unsplashimages');
 
-function openCloseList() {
-  document.querySelector('.fontLists').style.display = open?"none":"flex";
-  open = !open
-}
-  
+
+unsplasht.addEventListener('click',(e)=>{
+  e.preventDefault()
+  unsplash.style.display = 'block'
+})
+
+
+cont.addEventListener('click',(e)=>{
+  e.preventDefault()
+  img.style.display = 'flex'
+})
