@@ -8,6 +8,10 @@ Pen Image
 
 A web app that collects text from users and allows them to choose a background image(upload theirs or choose from a list of unsplash images) and also customize the font size, type etc, then download their custom image with the text and everything.
 
+### Note
+	
+The configuration values are omitted. Contact our team to get them.
+
 ## Hosting
 
 Visit https://penas.netlify.app

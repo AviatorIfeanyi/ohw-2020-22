@@ -31,13 +31,9 @@ const upload = async () => {
       response.data; 
       if (response.status == "200") {
         if ( typeof(response.data) == "object") {
-          const preview = document.querySelector(".prevbox");
-          let image_img = document.createElement('img');
-          image_img.classList.add('image_img');
-          image_img.src = response.data.picture;
-          image_img.alt = response.data.name;
-          preview.appendChild(image_img);
-
+          const preview = document.querySelector(".image_img");
+          preview.src = response.data.picture;
+          preview.alt = response.data.name;
         } else { 
           show(response.data, "error");
         }
