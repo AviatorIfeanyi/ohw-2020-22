@@ -178,10 +178,20 @@ h2 span{
        padding: 8px 9%;
 }
 
-.group.twod input{
-    width: 45%;
+.group.twod input[type='number']{
+    width: 25%;
     padding: 15px 2%;
   
+}
+.group.twod input[type='color']{
+  width: 24%;
+  padding: 15px 2%;
+
+}
+.group.twod input[type='submit']{
+  width: 38%;
+  padding: 15px 2%;
+
 }
 .group.twod input[type='submit']{
   background-color: #000000;
