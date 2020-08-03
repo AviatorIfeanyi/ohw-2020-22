@@ -66,7 +66,7 @@ router.post("/upload", (req, res) => {
 });
 
 
-router.get('/search', (req, res) => {
+router.post('/search', (req, res) => {
   const page = parseInt(req.body.page) || 1
   const per_page = parseInt(req.body.per_page) || 5
 
@@ -91,7 +91,7 @@ router.get('/search', (req, res) => {
     })
 });
 
-router.get('/image', (req, res) => {
+router.post('/image', (req, res) => {
   const image = req.body.image;
   cloudinary.uploader.upload(image, function (error, result) {
     if (result) {
