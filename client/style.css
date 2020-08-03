@@ -107,11 +107,11 @@ h2 span{
   display: flex;
   justify-content: space-between;
 }
-.unsplash .unsplashimages a{
+/*.unsplash .unsplashimages a{
   width: 19%;
-}
-.unsplash .unsplashimages a img{
-  width: 100%;
+}*/
+.unsplash .unsplashimages img{
+  width: 19%;
 }
 .unsplash .unsplashimages{
   display: none;
@@ -208,7 +208,7 @@ h2 span{
   background-color: #8f1332;
   color: #c0c1c7;
 }
-.group.twof button{
+.group.twof a{
   background-color: #000000;
   background-image: none;
   background: #000000;
@@ -220,8 +220,11 @@ h2 span{
   margin: auto;
   background-color: #8f1332;
   color: #c0c1c7;
+  text-decoration: none;
+  text-align: center;
 
 }
+
 .group.twof{
   margin-top: 28px;
 }
@@ -290,7 +293,7 @@ h2 span{
     justify-content: space-between;
     flex-direction: column;
   }
-  .unsplash .unsplashimages a{
+  .unsplash .unsplashimages img{
     width: 100%;
   }
   .unsplash .unsplashimages{
