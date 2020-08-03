@@ -14,7 +14,7 @@ The configuration values are omitted. Contact our team to get them.
 
 ## Hosting
 
-Visit https://penas.netlify.app
+Visit https://penm.netlify.app/
 
 ## Documentation
 
