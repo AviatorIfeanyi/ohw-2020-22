@@ -10,7 +10,7 @@ A web app that collects text from users and allows them to choose a background i
 
 ## Hosting
 
-Backend hosted on https://pen-image.herokuapp.com
+Visit https://penas.netlify.app
 
 ## Documentation
 

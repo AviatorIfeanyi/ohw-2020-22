@@ -12,34 +12,34 @@
 		<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
 		<link rel="shortcut icon" href="favicon.jpg" type="image/x-icon">
+		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 	</head>
 	<body>
 		<h2><span>Pen</span>  Images</h2>
-	   <form action="">
+	   <form class="form" id="formElem">
 		   <h4>Upload a picture</h4>
 		   <div class="first">
-			  <input class="upload" type="file" name="Picture" id=""  >
+			  <input class="upload" type="file" name="picture" id="upload"  >
 			  <input type="submit" class="unsplasht" value="Choose from unsplash">
 		   </div>
 		   <div class="unsplash">
-			   <div class="flex">
-					<input type="text" placeholder="Input Category of Image">
+			   <div class="flex"> 
+					<input type="text" id="search" placeholder="Input Category of Image">
 					<input type="submit" class="cont" value="Continue">
 					
 			   </div>
 			   <div class="unsplashimages">
-				   <a href=""><img src="yfe2vjtl_sx1iiijj5qu15deff8b343637 (1).jpg" alt="" class="one"> </a>
-				   <a href=""><img src="yfe2vjtl_sx1iiijj5qu15deff8b343637 (1).jpg" alt="" class="one"> </a>
-				   <a href=""><img src="yfe2vjtl_sx1iiijj5qu15deff8b343637 (1).jpg" alt="" class="one"> </a>
-				   <a href=""><img src="yfe2vjtl_sx1iiijj5qu15deff8b343637 (1).jpg" alt="" class="one"> </a>
-				   <a href=""><img src="yfe2vjtl_sx1iiijj5qu15deff8b343637 (1).jpg" alt="" class="one"> </a>
+				   <a href=""><img src="" alt="" class="one"> </a>
+				   <a href=""><img src="" alt="" class="one"> </a>
+				   <a href=""><img src="" alt="" class="one"> </a>
+				   <a href=""><img src="" alt="" class="one"> </a>
+				   <a href=""><img src="" alt="" class="one"> </a>
 			   </div>
 		   </div>
            <div class="flexp">
 			<div class="preview">
 				<h4>Image Preview</h4>
 				<div class="prevbox">
- 
 				</div>
 				<select name="" id="">
 					<option value="">Crop</option>
@@ -111,7 +111,6 @@
 				</div>
 				<div class="group twod">
 					<input type="color">
-					<input type="submit" value="Preview">
 				</div>
 				<div class="group twof">
 					<button>Download</button>
@@ -125,5 +124,7 @@
 		   
 	   </form>
 	 <script type="text/javascript" src="main.js"></script>
+	 <script type="text/javascript" src="upload.js"></script>
+	 <script type="text/javascript" src="search.js"></script>
 	</body>
 </html>
