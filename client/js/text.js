@@ -119,7 +119,7 @@ const Text = async (name) => {
         if ( typeof(response.data.picError) == "undefined") {
           const preview = document.querySelector(".image_img");
           preview.src = response.data.textImage.slice(10, -4);
-          preview.alt = "preview";
+        
 
           const download = document.querySelector(".download");
           download.href = response.data.textImage.slice(10, -4);
