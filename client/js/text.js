@@ -90,14 +90,6 @@ const downloadClick = imagePrev.addEventListener("click", async (event) => {
     gravity = document.querySelector("#gravity3").value
   }else if(document.querySelector("#gravity4").selected){
     gravity = document.querySelector("#gravity4").value
-  }else if(document.querySelector("#gravity5").selected){
-    gravity = document.querySelector("#gravity5").value
-  }else if(document.querySelector("#gravity6").selected){
-    gravity = document.querySelector("#gravity6").value
-  }else if(document.querySelector("#gravity7").selected){
-    gravity = document.querySelector("#gravity7").value
-  }else if(document.querySelector("#gravity8").selected){
-    gravity = document.querySelector("#gravity8").value
   }else{
     gravity = "north";
   }
